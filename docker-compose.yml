@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./AmazonClone
+    container_name: amozon-app
+    networks:
+      - amozon
+    ports:
+      - "8081:80"
+  
+networks:
+  amozon:
+    driver: bridge
