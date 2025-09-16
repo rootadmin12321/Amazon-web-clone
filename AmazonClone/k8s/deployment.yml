@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: amazon-deployment
+  namespace: amazon-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amazon
+  template:
+    metadata:
+      labels:
+        app: amazon
+    spec:
+      containers:
+        - name: amazon
+          image: root938/amazon-clone-web:latest
+          ports:
+            - containerPort: 80
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: amazon-service
+  namespace: amazon-app
+spec:
+  selector:
+    app: amazon
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
